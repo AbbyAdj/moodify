@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Moodify Weather Vibes</title>
+    <style>
+        body {
+            background-color: {{ theme.bg }};
+            color: {{ theme.text }};
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 100px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: {{ theme.text }};
+            color: {{ theme.bg }};
+        }
+    </style>
+</head>
+<body>
+    <h1>🌦️ Moodify</h1>
+    <form method="POST">
+        <input type="text" name="city" placeholder="Enter your city...">
+        <input type="submit" value="Get Vibe">
+    </form>
+    {% if weather %}
+        <h2>{{ city }}: {{ weather }}</h2>
+    {% endif %}
+</body>
+</html>
