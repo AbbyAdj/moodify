@@ -1,0 +1,132 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding-top: 100px;
+    margin: 0;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Form styling */
+input[type="text"] {
+    padding: 15px;
+    font-size: 18px;
+    width: 300px;
+    border: none;
+    border-radius: 5px;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Gradient background for fresh page */
+body.fresh {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23d5ab, #23a6d5);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: #2d3436;
+}
+
+/* Themed backgrounds for weather moods */
+body.clear {
+    background: linear-gradient(270deg, #fceabb, #f8b500, #fceabb);
+    background-size: 800% 800%;
+    animation: gradientShift 15s ease infinite, pulseBackground 8s ease-in-out infinite;
+    color: #2d3436;
+}
+
+body.clouds {
+    background: linear-gradient(270deg, #d7d2cc, #304352, #d7d2cc);
+    background-size: 800% 800%;
+    animation: gradientShift 18s ease infinite, pulseBackground 8s ease-in-out infinite;
+    color: #2d3436;
+}
+
+body.rain {
+    background: linear-gradient(270deg, #4b79a1, #283e51, #4b79a1);
+    background-size: 800% 800%;
+    animation: gradientShift 15s ease infinite, pulseBackground 8s ease-in-out infinite;
+    color: #dfe6e9;
+}
+
+body.snow {
+    background: linear-gradient(270deg, #e0eafc, #cfdef3, #e0eafc);
+    background-size: 800% 800%;
+    animation: gradientShift 14s ease infinite, pulseBackground 8s ease-in-out infinite;
+    color: #2d3436;
+}
+
+body.thunderstorm {
+    background: linear-gradient(270deg, #141e30, #243b55, #141e30);
+    background-size: 800% 800%;
+    animation: gradientShift 12s ease infinite, pulseBackground 8s ease-in-out infinite;
+    color: #ffffff;
+}
+
+body.drizzle {
+    background: linear-gradient(270deg, #89f7fe, #66a6ff, #89f7fe);
+    background-size: 800% 800%;
+    animation: gradientShift 15s ease infinite, pulseBackground 8s ease-in-out infinite;
+    color: #2d3436;
+}
+
+body.mist {
+    background: linear-gradient(270deg, #606c88, #3f4c6b, #606c88);
+    background-size: 800% 800%;
+    animation: gradientShift 20s ease infinite, pulseBackground 8s ease-in-out infinite;
+    color: #dfe6e9;
+}
+
+body.fog {
+    background: linear-gradient(270deg, #bdc3c7, #2c3e50, #bdc3c7);
+    background-size: 800% 800%;
+    animation: gradientShift 18s ease infinite, pulseBackground 8s ease-in-out infinite;
+    color: #dfe6e9;
+}
+
+body.haze {
+    background: linear-gradient(270deg, #f7971e, #ffd200, #f7971e);
+    background-size: 800% 800%;
+    animation: gradientShift 14s ease infinite, pulseBackground 8s ease-in-out infinite;
+    color: #2d3436;
+}
+
+h1 {
+    cursor: pointer;
+    display: inline-block;
+    animation: floating 4s ease-in-out infinite;
+    user-select: none;
+}
+
+.intro {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 15px auto 40px auto;
+    color: inherit; /* use the theme text color */
+    font-weight: 500;
+    line-height: 1.5;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+@keyframes floating {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(15px); }
+}
+
+
+@keyframes pulseBackground {
+  0%, 100% { filter: brightness(100%); }
+  50% { filter: brightness(110%); } /* slight brightness pulse */
+}
