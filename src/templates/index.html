@@ -3,37 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Moodify Weather Vibes</title>
-    <style>
-        body {
-            background-color: {{ theme.bg }};
-            color: {{ theme.text }};
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding-top: 100px;
-        }
-        input[type="text"] {
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-        }
-        input[type="submit"] {
-            padding: 10px 20px;
-            margin-left: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: {{ theme.text }};
-            color: {{ theme.bg }};
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
 </head>
-<body>
-    <h1>🌦️ Moodify</h1>
+<body class="{% if weather %}
+                {{ weather.main.lower() }}
+             {% else %}
+                fresh
+             {% endif %}">
+    <h1 onclick="window.location.href='/'">🌦️ Moodify</h1>
+
+    <p class="intro">
+      Enter your city to get a Spotify playlist that matches the current weather mood —
+      your personal soundtrack for rain, sun, snow and many more!
+    </p>
+
     <form method="POST">
-        <input type="text" name="city" placeholder="Enter your city...">
-        <input type="submit" value="Get Vibe">
+        <div>
+            <input type="text" name="city" placeholder="Enter your city...">
+        </div>
+        <br>
+<!--        <div>-->
+<!--&lt;!&ndash;            <input type="text" name="country" placeholder="Enter your state/country...">&ndash;&gt;-->
+<!--        </div>-->
+<!--        <br>-->
+        <button type="submit">Get Vibe</button>
     </form>
+
     {% if weather %}
-        <h2>{{ city }}: {{ weather }}</h2>
+        <img src = "{{ weather_icon_url }}" alt="weather icon">
+        <h3>The weather in {{ city }}, {{ country }} is {{ weather.description }}</h3>
+    {% endif %}
+    <br>
+    {% if playlist_url %}
+        <h3>Here's your vibe to match the weather 🎵</h3>
+        <iframe src="{{ playlist_url | replace('open.spotify.com', 'open.spotify.com/embed') }}"
+                width="600" height="500" frameborder="0"
+                allowtransparency="true" allow="encrypted-media"></iframe>
+
+        <p>Want it on your own Spotify? Scan below 👇</p>
+        <img src="{{ qr_code }}"
+             alt="Spotify Playlist Code" width="200">
     {% endif %}
 </body>
 </html>
