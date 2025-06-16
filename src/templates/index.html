@@ -47,7 +47,8 @@
 {% endif %}
 {% endwith %}
 
-<br>
+<!--<br>-->
+<hr style="margin: 50px auto; width: 80%; border-color: #ccc;">
 
 {% if weather %}
 <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
@@ -59,12 +60,12 @@
 </div>
 {% endif %}
 
-<br>
-
 {% if playlist_url %}
+
 <h3>Here's your vibe to match the weather 🎵</h3>
+<hr style="margin: 50px auto; width: 80%; border-color: #ccc;">
 <br>
-<div style="display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap; margin-top: 20px;">
+<div style="display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap; margin-top: 20px; padding: 30px 0">
     <iframe src="{{ playlist_url | replace('open.spotify.com', 'open.spotify.com/embed') }}"
             data-current-url="{{ playlist_url }}"
             width="600" height="500" frameborder="0"
@@ -77,17 +78,24 @@
     </div>
 </div>
 
+<hr style="width: 80%; border-color: #ccc;">
+
 {% endif %}
 
-<hr style="margin: 50px auto; width: 80%; border-color: #ccc;">
 
-
-<section id="how-it-works">
-  <h2>How It Works</h2>
-  <!-- Explanation goes here -->
+<section id="how-it-works" style="padding: 0 10px">
+    <h2>How It Works</h2>
+    <hr style="width: 80%; border-color: #ccc;">
+    <p style="padding: 30px 0;">
+        Simply enter your city into the search box to get a curated playlist based on the
+        current weather conditions.
+        It's as simple as that!</p>
+    <p>
+        Want to collaborate on or contribute to this project?
+        Simply submit a pull request to the <a href="https://github.com/AbbyAdj/moodify">repo</a>
+    </p>
 </section>
 
-<hr style="margin: 50px auto; width: 80%; border-color: #ccc;">
 
 <footer>
     <p>Made with 💻 & 🎵 by <a href="https://github.com/AbbyAdj" target="_blank" style="color: inherit; text-decoration: underline;">Abby Adjei</a></p>
