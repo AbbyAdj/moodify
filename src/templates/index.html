@@ -4,46 +4,106 @@
     <meta charset="UTF-8">
     <title>Moodify Weather Vibes</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 </head>
 <body class="{% if weather %}
                 {{ weather.main.lower() }}
              {% else %}
                 fresh
              {% endif %}">
-    <h1 onclick="window.location.href='/'">🌦️ Moodify</h1>
 
-    <p class="intro">
-      Enter your city to get a Spotify playlist that matches the current weather mood —
-      your personal soundtrack for rain, sun, snow and many more!
-    </p>
+<header class="app-header">
+  <h1 onclick="window.location.href='/'" style="cursor: pointer;">🌦️ Moodify</h1>
+  <nav class="nav-links">
+    <a href="#how-it-works">How It Works</a>
+    <a href="https://github.com/AbbyAdj" target="_blank">GitHub</a>
+  </nav>
+</header>
+<br>
+<br>
+<p class="tagline"><b>Your personal weather playlist generator</b></p>
+<p class="intro">
+    Enter your city to get a Spotify playlist that matches the current weather mood —
+    your personal soundtrack for rain, sun, snow and many more!
+</p>
 
-    <form method="POST">
-        <div>
-            <input type="text" name="city" placeholder="Enter your city...">
-        </div>
-        <br>
-<!--        <div>-->
-<!--&lt;!&ndash;            <input type="text" name="country" placeholder="Enter your state/country...">&ndash;&gt;-->
-<!--        </div>-->
-<!--        <br>-->
-        <button type="submit">Get Vibe</button>
-    </form>
-
-    {% if weather %}
-        <img src = "{{ weather_icon_url }}" alt="weather icon">
-        <h3>The weather in {{ city }}, {{ country }} is {{ weather.description }}</h3>
-    {% endif %}
+<form method="POST" id="moodify-form" onsubmit="return validateForm()">
+    <div>
+        <input type="text" name="city" placeholder="Enter your city..." value="{{ city or '' }}">
+         <input type="hidden" name="current_playlist_url" value="{{ playlist_url }}">
+    </div>
     <br>
-    {% if playlist_url %}
-        <h3>Here's your vibe to match the weather 🎵</h3>
-        <iframe src="{{ playlist_url | replace('open.spotify.com', 'open.spotify.com/embed') }}"
-                width="600" height="500" frameborder="0"
-                allowtransparency="true" allow="encrypted-media"></iframe>
+    <button type="submit" name="action" value="new_city">Get Vibe</button>
+    {% if weather %}
+    <button type="submit" name="action" value="new_playlist" onclick="captureOldPlaylist()">Get Another Playlist</button>
+    {% endif %}
+</form>
 
-        <p>Want it on your own Spotify? Scan below 👇</p>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="flash">{{ message }}</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<br>
+
+{% if weather %}
+<div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+    <img src="{{ weather_icon_url }}" alt="weather icon" style="height: 100px;">
+    <h3 style="margin: 0; line-height: 1;">
+        The weather in {{ city.title() }}{% if country %}, {{ country }}{% endif %} is {{ weather.description }}
+    </h3>
+    <img src="{{ weather_icon_url }}" alt="weather icon" style="height: 100px;">
+</div>
+{% endif %}
+
+<br>
+
+{% if playlist_url %}
+<h3>Here's your vibe to match the weather 🎵</h3>
+<br>
+<div style="display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap; margin-top: 20px;">
+    <iframe src="{{ playlist_url | replace('open.spotify.com', 'open.spotify.com/embed') }}"
+            data-current-url="{{ playlist_url }}"
+            width="600" height="500" frameborder="0"
+            allowtransparency="true" allow="encrypted-media">
+    </iframe>
+    <div>
+        <p><b>Want to add it on Spotify? Scan below 👇</b></p>
         <img src="{{ qr_code }}"
              alt="Spotify Playlist Code" width="200">
-    {% endif %}
+    </div>
+</div>
+
+{% endif %}
+
+<hr style="margin: 50px auto; width: 80%; border-color: #ccc;">
+
+
+<section id="how-it-works">
+  <h2>How It Works</h2>
+  <!-- Explanation goes here -->
+</section>
+
+<hr style="margin: 50px auto; width: 80%; border-color: #ccc;">
+
+<footer>
+    <p>Made with 💻 & 🎵 by <a href="https://github.com/AbbyAdj" target="_blank" style="color: inherit; text-decoration: underline;">Abby Adjei</a></p>
+    <p>Powered by <a href="https://openweathermap.org/" target="_blank" style="color: inherit; text-decoration: underline;">OpenWeather</a> &
+        <a href="https://developer.spotify.com/" target="_blank" style="color: inherit; text-decoration: underline;">Spotify API</a></p>
+</footer>
+
+<div id="customPopup" class="popup-overlay" style="display:none;">
+    <div class="popup-content">
+        <p id="popupMessage">This is a custom popup!</p>
+        <button id="popupCloseBtn">Close</button>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
 </body>
+
 </html>
