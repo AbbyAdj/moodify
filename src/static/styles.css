@@ -136,7 +136,8 @@ footer {
   text-align: center;
   font-size: 14px;
   color: #777;
-  background-color: transparent;
+  background-color: rgba(255, 255, 255, 0.05); /* subtle transparent */
+  backdrop-filter: blur(8px); /* frosted glass effect */
   box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
 }
 

@@ -6,4 +6,8 @@ pytest
 pytest-testdox
 qrcode[pil]==8.2
 pillow==11.2.1
+<<<<<<< src/final-fixes
 waitress==3.0.2
+=======
+waitress==3.0.2
+>>>>>>> master
